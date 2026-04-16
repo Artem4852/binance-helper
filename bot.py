@@ -165,8 +165,14 @@ async def symbols_update(context):
         selected_symbols = json.load(f)
     with open("selected_symbols_2.json", "r") as f:
         selected_symbols_2 = json.load(f)
-    
-    message = "Selected Symbols:\n\n" + "\n".join(selected_symbols) + "\n\n" + "Selected Symbols 2nd level:\n\n" + "\n".join(selected_symbols_2)
+    message = ""
+    if selected_symbols:
+        message += "Selected Symbols:\n\n" + "\n".join(selected_symbols) + "\n\n"
+    if selected_symbols_2:
+        message += "Selected Symbols 2nd level:\n\n" + "\n".join(selected_symbols_2)
+    if not message:
+        return
+
     await context.bot.send_message(chat_id=452856763, text=message)
 
 def main():

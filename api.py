@@ -321,8 +321,6 @@ class BinanceAPI:
             change_10s = json.load(f)
         with open("volume5m.json", "r") as f:
             volume_5m = json.load(f)
-        with open("selected_symbols.json", "r") as f:
-            selected_symbols_old = json.load(f)
         with open("additional_data.json", "r") as f:
             additional_data = json.load(f)
             symbols_already = [item['symbol'] for item in additional_data]
@@ -337,10 +335,10 @@ class BinanceAPI:
         for item in volume_5m:
             symbol = item['symbol']
             if symbol in daily_change and symbol in change_10s:
-                if 15 < daily_change[symbol] and change_10s[symbol] >= 1:
+                if 15 > daily_change[symbol] and change_10s[symbol] >= 1:
                     selected_symbols.append(symbol)
                 
-        selected_symbols = [s for s in selected_symbols if s not in selected_symbols_old]
+        selected_symbols = [s for s in selected_symbols]
         selected_symbols_2 = []
         for symbol in selected_symbols:
             if symbol not in symbols_already:
