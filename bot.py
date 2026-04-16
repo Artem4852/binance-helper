@@ -21,15 +21,11 @@ def load_balance():
     with open('balance.json', 'r') as f:
         data = json.load(f)
 
-    with open('agent.json', 'r') as f:
-        agent_data = json.load(f)
-
     balance_data = {
         "totalWalletBalance": float(data.get("totalWalletBalance", 0)),
         "totalUnrealizedProfit": float(data.get("totalUnrealizedProfit", 0)),
         "totalMarginBalance": float(data.get("totalMarginBalance", 0)),
-        "positions": [],
-        "lastUpdated": agent_data.get("last_updated", "")
+        "positions": []
     }
     for position in data.get("positions", []):
         balance_data["positions"].append({
